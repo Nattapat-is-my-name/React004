@@ -20,6 +20,10 @@ import { PROMOTIONS } from '../shared/promotions';
 
 import { LEADERS } from '../shared/leaders';
 
+import DishDetail from './DishdetailComponent';
+
+
+
 
 
 
@@ -65,6 +69,17 @@ class Main extends Component {
                 leader={this.state.leaders.filter((leader) => leader.featured)[0]}
             />;
         const renderMenu = <Menu dishes={this.state.dishes} selectedDish={this.state.selectedDish} onClick={(dishId) => this.onDishSelect(dishId)} />;
+        const DishWithId = ({ match }) => {
+
+            return (
+
+                <DishDetail comments={this.props.comments} dishes={this.props.dishes} selectedDish={match.params.dishId} />
+
+            );
+
+        };
+
+
         return (
             <div>
                 <Header />
@@ -73,6 +88,7 @@ class Main extends Component {
                     <Route path='/home' element={HomePage} />
                     <Route path='/menu' element={renderMenu} />
                     <Route exact path='/contactus' element={<Contact />} />
+                    <Route path='/menu/:dishId' component={DishWithId} />
                 </Routes>
                 <Footer />
             </div>
